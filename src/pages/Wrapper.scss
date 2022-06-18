@@ -28,6 +28,13 @@
 
 // ---------- products-container
 
+
+.products-navbar {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #e6e6e6;
+}
+
 .products-container {
     margin-top: 2rem;
     display: flex;
@@ -53,14 +60,17 @@
         }
 
         span {
-            background-color:rgb(106, 141, 218);
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
+            margin: 0 1rem;
+            &:first-of-type {
+                background-color:rgb(106, 141, 218);
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+            }
         }
 
         .actions {
