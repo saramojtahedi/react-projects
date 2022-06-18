@@ -1,12 +1,13 @@
+import _ from 'lodash'
 import React, { useContext, useReducer, useState } from 'react'
 
 const ProductContext = React.createContext()
 const ProductContextDispatcher = React.createContext()
 
 const initialState = [
-    {id: 1, name: 'سیب', price: 1200, quantity: 1},
-    {id: 2, name: 'موز', price: 1900, quantity: 2},
-    {id: 3, name: 'گلابی', price: 1000, quantity: 3},
+    {id: 1, name: 'سیب', price: 1200, size:['s', 'l'], quantity: 1},
+    {id: 2, name: 'موز', price: 1900, size:['m', 'l'], quantity: 2},
+    {id: 3, name: 'گلابی', price: 1000, size:['s'], quantity: 3},
 ]
 
 const reducer = (state, action) => {
@@ -36,6 +37,24 @@ const reducer = (state, action) => {
         case "REMOVE": {
             const filteredProducts = state.filter(item => item.id !== action.id)
             return filteredProducts
+        }
+        case "FILTER": {
+            if(action.event.value === '') {
+                return initialState
+            } else {
+                const updatedProducts = initialState.filter(item => item.size.indexOf(action.event.value) >= 0)
+                return updatedProducts
+            }
+        }
+        case "SORT": {
+            // console.log(action)
+            const value = action.event.value
+            const products = [...state]
+            if(value === 'low') {
+                return _.orderBy(products, "price", ["asc"])
+            } else {
+                return _.orderBy(products, "price", ["desc"])
+            }
         }
     }
 }
